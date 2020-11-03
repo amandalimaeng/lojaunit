@@ -1,34 +1,45 @@
-plugins {
-	id 'org.springframework.boot' version '2.3.2.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-	id 'java'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE'
+    }
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'war'
 
-configurations {
-	developmentOnly
-	runtimeClasspath {
-		extendsFrom developmentOnly
-	}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+war {
+    baseName = 'resource-server'
+    version =  '0.1.0'
 }
 
 repositories {
-	mavenCentral()
+    jcenter()    
+    maven { url "http://repo.spring.io/libs-snapshot" }
 }
 
+configurations {
+    providedRuntime
+    compile.exclude group:'ch.qos.logback'
+}
+
+// In this section you declare the dependencies for your production and test code
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'mysql:mysql-connector-java'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+    
+    compile("org.springframework.boot:spring-boot-starter-web")
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile("org.postgresql:postgresql:9.4-1200-jdbc41") 
 }
 
-test {
-	useJUnitPlatform()
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
 }
