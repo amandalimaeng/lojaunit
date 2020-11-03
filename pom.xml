@@ -15,9 +15,7 @@
 	<name>Projeto Loja Unit</name>
 	<description>Projeto final da disciplina Módulo 02 - Learn Immersive Development Full-Stack</description>
 
-	<properties>
-		<java.version>11</java.version>
-	</properties>
+
 
 	<dependencies>
 		<dependency>
