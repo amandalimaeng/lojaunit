@@ -8,7 +8,8 @@ import javax.sql.DataSource;
 @Configuration
 public class DatabaseConfig {
 
-  @Value("${spring.datasource.url}")
+ // @Value("${spring.datasource.url}")
+	@Value("jdbc:postgresql://localhost/lojaunit?user=postgres&password=123456")
   private String dbUrl;
 
   @Bean
